@@ -1,0 +1,69 @@
+.dashboard {
+  background: #ffffff;
+  border: 1px solid #d9e1e8;
+  border-radius: 8px;
+  display: grid;
+  gap: 24px;
+  padding: 24px;
+}
+
+.eyebrow {
+  color: #2f5d8c;
+  font-size: 13px;
+  font-weight: 700;
+  margin: 0 0 8px;
+  text-transform: uppercase;
+}
+
+.dashboard h1 {
+  margin: 0;
+}
+
+.summary {
+  color: #55616d;
+  margin: 8px 0 0;
+}
+
+.metrics {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.metrics article {
+  background: #eef5f1;
+  border: 1px solid #c6ded3;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.metrics span,
+.token-box span {
+  color: #55616d;
+  display: block;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.metrics strong {
+  color: #173c35;
+  font-size: 28px;
+}
+
+.token-box {
+  background: #f7f8fa;
+  border: 1px solid #d9e1e8;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.token-box code {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 720px) {
+  .metrics {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "micro-frontends-module-federation",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Monorepo com Angular Shell, React Remote e Svelte Remote usando Webpack 5 Module Federation.",
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "start": "npm-run-all --parallel start:shell start:dashboard start:profile",
+    "start:shell": "npm --workspace @mfe/shell-angular run start",
+    "start:dashboard": "npm --workspace @mfe/dashboard-react run start",
+    "start:profile": "npm --workspace @mfe/profile-svelte run start",
+    "build": "npm-run-all build:*",
+    "build:shell": "npm --workspace @mfe/shell-angular run build",
+    "build:dashboard": "npm --workspace @mfe/dashboard-react run build",
+    "build:profile": "npm --workspace @mfe/profile-svelte run build"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  },
+  "engines": {
+    "node": "^20.19.0 || ^22.12.0 || >=24.0.0"
+  }
+}

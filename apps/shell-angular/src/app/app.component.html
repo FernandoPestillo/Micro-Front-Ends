@@ -1,0 +1,24 @@
+<header class="topbar">
+  <a class="brand" routerLink="/">MFE Shell</a>
+
+  <nav class="nav" aria-label="Rotas principais">
+    <a routerLink="/dashboard" routerLinkActive="active">Dashboard React</a>
+    <a routerLink="/perfil" routerLinkActive="active">Perfil Svelte</a>
+  </nav>
+</header>
+
+<main class="layout">
+  <section class="token-panel">
+    <label for="auth-token">Token de Autenticação</label>
+    <div class="token-row">
+      <input
+        id="auth-token"
+        [value]="token()"
+        (input)="updateToken($any($event.target).value)"
+      >
+      <button type="button" (click)="refreshToken()">Gerar token</button>
+    </div>
+  </section>
+
+  <router-outlet></router-outlet>
+</main>
