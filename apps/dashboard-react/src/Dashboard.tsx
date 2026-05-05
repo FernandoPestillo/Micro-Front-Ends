@@ -1,20 +1,26 @@
 import { useEffect, useState } from 'react';
-import { AUTH_TOKEN_EVENT, AuthTokenPayload, notifyRemoteReady } from './federation-events';
+import {
+  MFE_EVENTS,
+  ThemeMode,
+  notifyRemoteReady,
+  subscribeMfeEvent
+} from '@mfe/mfe-contracts';
 import './styles.css';
 
 export default function Dashboard() {
   const [token, setToken] = useState('aguardando token do Shell');
+  const [theme, setTheme] = useState<ThemeMode>('light');
 
   useEffect(() => {
-    const handleToken = (event: Event) => {
-      const customEvent = event as CustomEvent<AuthTokenPayload>;
-      setToken(customEvent.detail.token);
+    const unsubscribeToken = subscribeMfeEvent(MFE_EVENTS.authToken, ({ token }) => setToken(token));
+    const unsubscribeTheme = subscribeMfeEvent(MFE_EVENTS.themeChanged, ({ theme }) => setTheme(theme));
+
+    notifyRemoteReady({ name: 'dashboardReact', framework: 'react' });
+
+    return () => {
+      unsubscribeToken();
+      unsubscribeTheme();
     };
-
-    window.addEventListener(AUTH_TOKEN_EVENT, handleToken);
-    notifyRemoteReady('dashboardReact');
-
-    return () => window.removeEventListener(AUTH_TOKEN_EVENT, handleToken);
   }, []);
 
   return (
@@ -43,6 +49,11 @@ export default function Dashboard() {
       <div className="token-box">
         <span>Token recebido</span>
         <code>{token}</code>
+      </div>
+
+      <div className="token-box">
+        <span>Tema recebido</span>
+        <code>{theme}</code>
       </div>
     </section>
   );

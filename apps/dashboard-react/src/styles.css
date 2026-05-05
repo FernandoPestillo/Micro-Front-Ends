@@ -1,14 +1,15 @@
 .dashboard {
-  background: #ffffff;
-  border: 1px solid #d9e1e8;
+  background: var(--mfe-surface, #ffffff);
+  border: 1px solid var(--mfe-border, #d9e1e8);
   border-radius: 8px;
+  color: var(--mfe-text, #1d252c);
   display: grid;
   gap: 24px;
   padding: 24px;
 }
 
 .eyebrow {
-  color: #2f5d8c;
+  color: var(--mfe-accent, #2f5d8c);
   font-size: 13px;
   font-weight: 700;
   margin: 0 0 8px;
@@ -20,7 +21,7 @@
 }
 
 .summary {
-  color: #55616d;
+  color: var(--mfe-muted, #55616d);
   margin: 8px 0 0;
 }
 
@@ -31,28 +32,28 @@
 }
 
 .metrics article {
-  background: #eef5f1;
-  border: 1px solid #c6ded3;
+  background: var(--mfe-surface-alt, #eef5f1);
+  border: 1px solid var(--mfe-border, #c6ded3);
   border-radius: 8px;
   padding: 16px;
 }
 
 .metrics span,
 .token-box span {
-  color: #55616d;
+  color: var(--mfe-muted, #55616d);
   display: block;
   font-size: 13px;
   margin-bottom: 8px;
 }
 
 .metrics strong {
-  color: #173c35;
+  color: var(--mfe-text, #173c35);
   font-size: 28px;
 }
 
 .token-box {
-  background: #f7f8fa;
-  border: 1px solid #d9e1e8;
+  background: var(--mfe-surface-alt, #f7f8fa);
+  border: 1px solid var(--mfe-border, #d9e1e8);
   border-radius: 8px;
   padding: 16px;
 }

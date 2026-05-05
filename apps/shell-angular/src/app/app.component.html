@@ -4,19 +4,42 @@
   <nav class="nav" aria-label="Rotas principais">
     <a routerLink="/dashboard" routerLinkActive="active">Dashboard React</a>
     <a routerLink="/perfil" routerLinkActive="active">Perfil Svelte</a>
+    <a routerLink="/perfil-element" routerLinkActive="active">Perfil Web Component</a>
   </nav>
 </header>
 
 <main class="layout">
   <section class="token-panel">
-    <label for="auth-token">Token de Autenticação</label>
-    <div class="token-row">
-      <input
-        id="auth-token"
-        [value]="token()"
-        (input)="updateToken($any($event.target).value)"
-      >
-      <button type="button" (click)="refreshToken()">Gerar token</button>
+    <div class="field">
+      <label for="auth-token">Token de Autenticação</label>
+      <div class="token-row">
+        <input
+          id="auth-token"
+          [value]="token()"
+          (input)="updateToken($any($event.target).value)"
+        >
+        <button type="button" (click)="refreshToken()">Gerar token</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <span class="field-label">Tema</span>
+      <div class="segmented" role="group" aria-label="Tema da experiencia">
+        <button
+          type="button"
+          [class.selected]="theme() === 'light'"
+          (click)="setTheme('light')"
+        >
+          Claro
+        </button>
+        <button
+          type="button"
+          [class.selected]="theme() === 'dark'"
+          (click)="setTheme('dark')"
+        >
+          Escuro
+        </button>
+      </div>
     </div>
   </section>
 

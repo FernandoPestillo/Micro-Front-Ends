@@ -1,10 +1,15 @@
-declare module 'dashboardReact/Dashboard' {
-  import { ComponentType } from 'react';
+declare module 'dashboardReact/mountDashboard' {
+  export type MountDashboardOptions = {
+    target: HTMLElement;
+  };
 
-  const Dashboard: ComponentType;
-  export default Dashboard;
+  export function mountDashboard(options: MountDashboardOptions): () => void;
 }
 
 declare module 'profileSvelte/mountUserProfile' {
   export function mountUserProfile(target: HTMLElement): () => void;
+}
+
+declare module 'profileSvelte/defineUserProfileElement' {
+  export function defineUserProfileElement(): void;
 }

@@ -1,3 +1,4 @@
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { container } = require('webpack');
 const { ModuleFederationPlugin } = container;
@@ -18,6 +19,9 @@ module.exports = {
     }
   },
   resolve: {
+    alias: {
+      '@mfe/mfe-contracts': path.resolve(__dirname, '../../packages/mfe-contracts/src/index.ts')
+    },
     extensions: ['.tsx', '.ts', '.jsx', '.js']
   },
   module: {
@@ -38,9 +42,14 @@ module.exports = {
       name: 'dashboardReact',
       filename: 'remoteEntry.js',
       exposes: {
-        './Dashboard': './src/Dashboard'
+        './Dashboard': './src/Dashboard',
+        './mountDashboard': './src/mount-dashboard'
       },
       shared: {
+        '@mfe/mfe-contracts': {
+          singleton: true,
+          requiredVersion: '0.1.0'
+        },
         react: {
           singleton: true,
           requiredVersion: dependencies.react

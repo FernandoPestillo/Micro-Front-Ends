@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { DashboardReactBridgeComponent } from './dashboard-react-bridge.component';
+import { ProfileSvelteElementBridgeComponent } from './profile-svelte-element-bridge.component';
 import { ProfileSvelteBridgeComponent } from './profile-svelte-bridge.component';
 
 export const routes: Routes = [
@@ -15,5 +16,9 @@ export const routes: Routes = [
   {
     path: 'perfil',
     component: ProfileSvelteBridgeComponent
+  },
+  {
+    path: 'perfil-element',
+    component: ProfileSvelteElementBridgeComponent
   }
 ];

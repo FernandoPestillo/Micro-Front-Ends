@@ -1,3 +1,4 @@
+const path = require('path');
 const { share } = require('@angular-architects/module-federation/webpack');
 const { container } = require('@angular-devkit/build-angular/node_modules/webpack');
 const { ModuleFederationPlugin } = container;
@@ -15,13 +16,17 @@ module.exports = {
   optimization: {
     runtimeChunk: false
   },
+  devServer: {
+    historyApiFallback: true
+  },
+  resolve: {
+    alias: {
+      '@mfe/mfe-contracts': path.resolve(__dirname, '../../packages/mfe-contracts/src/index.ts')
+    }
+  },
   plugins: [
     new ModuleFederationPlugin({
       name: 'shellAngular',
-      remotes: {
-        dashboardReact: 'dashboardReact@http://localhost:4201/remoteEntry.js',
-        profileSvelte: 'profileSvelte@http://localhost:4202/remoteEntry.js'
-      },
       shared: share({
         '@angular/core': {
           singleton: true,
@@ -47,6 +52,11 @@ module.exports = {
           singleton: true,
           strictVersion: true,
           requiredVersion: 'auto'
+        },
+        '@mfe/mfe-contracts': {
+          singleton: true,
+          strictVersion: true,
+          requiredVersion: '0.1.0'
         },
         react: {
           singleton: true,

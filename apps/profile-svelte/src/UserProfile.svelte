@@ -1,19 +1,30 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { AUTH_TOKEN_EVENT, type AuthTokenPayload, notifyRemoteReady } from './federation-events';
+  import {
+    MFE_EVENTS,
+    notifyRemoteReady,
+    subscribeMfeEvent,
+    type ThemeMode
+  } from '@mfe/mfe-contracts';
 
   let token = 'aguardando token do Shell';
+  let theme: ThemeMode = 'light';
 
   onMount(() => {
-    const handleToken = (event: Event) => {
-      const customEvent = event as CustomEvent<AuthTokenPayload>;
-      token = customEvent.detail.token;
+    const unsubscribeToken = subscribeMfeEvent(MFE_EVENTS.authToken, (payload) => {
+      token = payload.token;
+    });
+
+    const unsubscribeTheme = subscribeMfeEvent(MFE_EVENTS.themeChanged, (payload) => {
+      theme = payload.theme;
+    });
+
+    notifyRemoteReady({ name: 'profileSvelte', framework: 'svelte' });
+
+    return () => {
+      unsubscribeToken();
+      unsubscribeTheme();
     };
-
-    window.addEventListener(AUTH_TOKEN_EVENT, handleToken);
-    notifyRemoteReady('profileSvelte');
-
-    return () => window.removeEventListener(AUTH_TOKEN_EVENT, handleToken);
   });
 </script>
 
@@ -47,20 +58,26 @@
     <span>Token recebido</span>
     <code>{token}</code>
   </div>
+
+  <div class="token-box">
+    <span>Tema recebido</span>
+    <code>{theme}</code>
+  </div>
 </section>
 
 <style>
   .profile {
-    background: #ffffff;
-    border: 1px solid #d9e1e8;
+    background: var(--mfe-surface, #ffffff);
+    border: 1px solid var(--mfe-border, #d9e1e8);
     border-radius: 8px;
+    color: var(--mfe-text, #1d252c);
     display: grid;
     gap: 24px;
     padding: 24px;
   }
 
   .eyebrow {
-    color: #7c4a03;
+    color: var(--mfe-accent, #7c4a03);
     font-size: 13px;
     font-weight: 700;
     margin: 0 0 8px;
@@ -72,7 +89,7 @@
   }
 
   .summary {
-    color: #55616d;
+    color: var(--mfe-muted, #55616d);
     margin: 8px 0 0;
   }
 
@@ -84,7 +101,7 @@
 
   .avatar {
     align-items: center;
-    background: #f4c95d;
+    background: var(--mfe-accent, #f4c95d);
     border-radius: 50%;
     color: #2c2412;
     display: flex;
@@ -102,7 +119,7 @@
   .person span,
   .details span,
   .token-box span {
-    color: #55616d;
+    color: var(--mfe-muted, #55616d);
   }
 
   .details {
@@ -113,8 +130,8 @@
 
   .details div,
   .token-box {
-    background: #f7f8fa;
-    border: 1px solid #d9e1e8;
+    background: var(--mfe-surface-alt, #f7f8fa);
+    border: 1px solid var(--mfe-border, #d9e1e8);
     border-radius: 8px;
     padding: 16px;
   }

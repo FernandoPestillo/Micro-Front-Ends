@@ -8,6 +8,11 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "baseUrl": "."
+    "baseUrl": ".",
+    "paths": {
+      "@mfe/mfe-contracts": [
+        "packages/mfe-contracts/src/index.ts"
+      ]
+    }
   }
 }

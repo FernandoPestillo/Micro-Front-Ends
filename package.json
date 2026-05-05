@@ -4,7 +4,8 @@
   "private": true,
   "description": "Monorepo com Angular Shell, React Remote e Svelte Remote usando Webpack 5 Module Federation.",
   "workspaces": [
-    "apps/*"
+    "apps/*",
+    "packages/*"
   ],
   "scripts": {
     "start": "npm-run-all --parallel start:shell start:dashboard start:profile",
